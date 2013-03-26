@@ -1,8 +1,8 @@
 # Puzzle - Programming Assignments Private Repository
 ### Student Information
-  + Name: Tommy Trojan
-  + USC Email: ttrojan@usc.edu
-  + USC ID: 0123456789
+  + Name: Erika Johnson
+  + USC Email: erikajoh@usc.edu
+  + USC ID: 3892385661
 
 ### Compile & Run Instructions
 The grader should use the following procedure to compile and run the code:
