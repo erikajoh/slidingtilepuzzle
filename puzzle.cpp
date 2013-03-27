@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
   Board b(size,initMoves,seed);
 
-  //**** Implement the gameplay
+  //**** Implements the gameplay
 
   int tileToMove;
 

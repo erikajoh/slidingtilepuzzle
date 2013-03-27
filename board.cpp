@@ -115,6 +115,7 @@ void Board::move(int tile)
   }
 }
 
+/** Maps potential moves */
 map<int, Board*> Board::potentialMoves()
 {
   map<int, Board*> boardMap;

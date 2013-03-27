@@ -35,13 +35,13 @@ class Board
   /** Returns true if the board is solved, false otherwise */
   bool solved();
 
-  // Operators
+  // Operator functions
   friend std::ostream& operator<<(std::ostream &os, const Board &b);
   bool operator==(const Board& rhs) const;
   bool operator<(const Board& rhs) const;
   bool operator!=(const Board& rhs) const;
   
-  // Accessors
+  // Accessor functions
   int* getTiles();
   int getSize();
   // Add any accessors
