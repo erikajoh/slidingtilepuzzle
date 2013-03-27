@@ -24,11 +24,18 @@ int main(int argc, char *argv[])
 
   //**** Implement the gameplay here
 
+  int tileToMove;
 
+  while(!b.solved()){
+    cout << b;
+    cout << "Enter tile number to move or -1 for a cheat: ";
+    cin >> tileToMove;
+    b.move(tileToMove);
+    cout << endl;
+  }
 
-
-
-
+  cout << b << endl;
+  cout << "Congrats! Ya solved it!" << endl;
 
   return 0;
 }
