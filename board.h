@@ -8,7 +8,7 @@
 class Board
 {
  public:
-  /**  default constructor */
+  /**  Default constructor */
   Board(); 
 
   /** Init a board of given size and scramble it with numInitMoves 

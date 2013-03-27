@@ -63,7 +63,7 @@ Board::Board(int size, int numInitMoves, int seed )
 }
 
 
-/** Default constructor. provide documentation here */
+/** Default constructor. Makes a 2x2 board in sorted frame. */
 Board::Board()
 {
   size_ = 4;
@@ -91,7 +91,7 @@ Board::Board(int *tiles, int size)
   }
 }
 
-/** Default destructor. provide documentation here */
+/** Default destructor. Deletes tiles_. */
 Board::~Board()
 {
   delete tiles_;
