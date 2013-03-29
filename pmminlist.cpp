@@ -32,8 +32,18 @@ void PMMinList::push(PuzzleMove* pm)
   //---- use the insert() method of std::List to insert it
   //---- See http://www.cplusplus.com/reference/list/list/insert/
 
-
-
+  for (it=slist_.begin(); it != slist_.end(); ++it){
+    int basef = (*it)->g_ + (*it)->h_;
+    int insertionf = pm->g_ + pm->h_;
+    if (insertionf < basef){
+      slist_.insert(it,pm);
+      break;
+    } else if (insertionf == basef){
+      ++it;
+      slist_.insert(it,pm);
+      break;
+    }
+  }
 
 }
 
