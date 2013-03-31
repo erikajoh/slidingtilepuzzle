@@ -8,6 +8,7 @@
 #include "puzzle_move.h"
 #include "puzzle_heur.h"
 #include "mylist.h"
+#include "pmminlist.h"
 
 class PuzzleSolver
 {
@@ -28,15 +29,20 @@ class PuzzleSolver
   int run(PuzzleHeuristic *ph);
 
   //**** Return the solution List
- 
+  MyList<int>& getSolutions();
 
   // Return how many expansions were performed in the search
   int getNumExpansions();
 
  private:
-  Board b_;
+  Board *b_;
   int expansions_;
   //**** Declare a List to store your solutions sequence of tiles to move
+  MyList<int> solutions_;
+  PMMinList openList_;
+  BoardSet closedList_;
+  vector<PuzzleMove*> garbageList_;
+
 };
 
 #endif
