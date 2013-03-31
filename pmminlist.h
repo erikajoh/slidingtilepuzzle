@@ -1,6 +1,7 @@
 #ifndef PMMINLIST_H
 #define PMMINLIST_H
 #include <list>
+#include "puzzle_move.h"
 
 /**
  * PMMinList implements a sorted list of PuzzleMoves
