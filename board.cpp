@@ -7,7 +7,6 @@
 #include "board.h"
 using namespace std;
 
-
 /** Init a board of given size and scramble it with numInitMoves 
  * by moving the space tile with a randomly chosen direction N, W, S, E
  * some of which may be invalid, in which case we skip that move 
@@ -162,7 +161,8 @@ map<int, Board*> Board::potentialMoves()
 
 }
 
-bool Board::solved(){
+bool Board::solved()
+{
   for (int i=0; i<size_; i++){
     if (tiles_[i] != i){
       return false;
@@ -171,7 +171,8 @@ bool Board::solved(){
     return true;
 }
 
-ostream& operator<<(ostream &os, const Board &b){
+ostream& operator<<(ostream &os, const Board &b)
+{
   int width = sqrt(b.size_);
   int rowNum = width;
   int j;
