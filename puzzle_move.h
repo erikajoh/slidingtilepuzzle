@@ -24,7 +24,7 @@ class PuzzleMove
 
   //**** Add any other member functions you think appropriate
 
-
+  void computeH(PuzzleHeuristic *ph);
 
 
 

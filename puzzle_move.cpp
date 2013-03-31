@@ -1,34 +1,31 @@
 #include "puzzle_move.h"
+#include <iostream>
 
 PuzzleMove::PuzzleMove(Board &b)
 {
+  b_ = new Board(b);
   g_ = 0;
+  h_ = 0;
   prev_ = NULL;
-  ManhattanHeuristic score;
-  h_ = score.compute(b.getTiles(),b.getSize());
 }
 
 PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *parent)
 {
-  g_=0;
+  g_ = parent->g_ + 1;
+  h_ = 0;
   tileMove_ = tile;
-  ManhattanHeuristic score;
-  Board tempb(*b);
-  tempb.move(tile);
-  b_ = &tempb;
-  h_ = score.compute(b_->getTiles(),b_->getSize());
-
+  b_ = new Board(*b);
   prev_ = parent;
-  PuzzleMove *temp = prev_;
-  while(prev_){
-    g_++;
-    temp = temp->prev_;
-  }
+}
+
+void PuzzleMove::computeH(PuzzleHeuristic *ph)
+{
+  h_ = ph->compute(b_->getTiles(), b_->getSize());
 }
 
 PuzzleMove::~PuzzleMove()
 {
-
+  delete b_;
 }
 
 // Compare to PuzzleMoves based on f distance (needed for priority queue)
