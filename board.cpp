@@ -85,7 +85,7 @@ Board::Board(const Board &b)
 Board::Board(int *tiles, int size)
 {
   size_ = size;
-  tiles_ = tiles;
+  tiles_ = new int[size_];
   for (int i=0; i<size_; i++){
     tiles_[i] = tiles[i];
   }
@@ -94,7 +94,7 @@ Board::Board(int *tiles, int size)
 /** Default destructor. Deletes tiles_. */
 Board::~Board()
 {
-  delete tiles_;
+  delete [] tiles_;
 }
 
 void Board::move(int tile)
@@ -109,21 +109,23 @@ void Board::move(int tile)
       tileLoc = i;
     }
   }
-  if (tileLoc-width == zeroLoc || tileLoc+width == zeroLoc || tileLoc%width >= 0 || tileLoc%width < width-1){
+  if (tileLoc-width == zeroLoc || tileLoc+width == zeroLoc || (zeroLoc%width != 0 && tileLoc+1 == zeroLoc) || (tileLoc%width != 0 && tileLoc-1 == zeroLoc)){
     tiles_[zeroLoc] = tile;
     tiles_[tileLoc] = 0;
+  } else {
+    cout << "Invalid tile move, please try again" << endl;
   }
 }
 
 /** Maps potential moves */
 map<int, Board*> Board::potentialMoves()
 {
-  map<int, Board*> boardMap;
   int width = sqrt(size_);
   int zeroLoc, up, down, left, right;
   for (int i=0; i<size_; i++){
     if (tiles_[i] == 0){
       zeroLoc = i;
+      break;
     }
   }
 
@@ -133,30 +135,30 @@ map<int, Board*> Board::potentialMoves()
   right = zeroLoc+1;
 
   if (up >= 0){
-    Board newBoard1(tiles_, size_);
-    newBoard1.move(up);
-    boardMap[up] = &newBoard1;
+    newBoard_ = new Board(*this);
+    newBoard_->move(tiles_[up]);
+    boardMap_[tiles_[up]] = newBoard_;
   }
 
   if (down < size_){
-    Board newBoard2(tiles_, size_);
-    newBoard2.move(down);
-    boardMap[down] = &newBoard2;
+    newBoard_ = new Board(*this);
+    newBoard_->move(tiles_[down]);
+    boardMap_[tiles_[down]] = newBoard_;
   }
 
   if (zeroLoc%width != 0){
-    Board newBoard3(tiles_, size_);
-    newBoard3.move(left);
-    boardMap[left] = &newBoard3;
+    newBoard_ = new Board(*this);
+    newBoard_->move(tiles_[left]);
+    boardMap_[tiles_[left]] = newBoard_;
   }
 
   if (zeroLoc%width != width-1){
-    Board newBoard4(tiles_, size_);
-    newBoard4.move(right);
-    boardMap[right] = &newBoard4;
+    newBoard_ = new Board(*this);
+    newBoard_->move(tiles_[right]);
+    boardMap_[tiles_[right]] = newBoard_;
   }
 
-  return boardMap;
+  return boardMap_;
 
 }
 

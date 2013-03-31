@@ -50,6 +50,8 @@ class Board
  private:
   int *tiles_;
   int size_;
+  Board *newBoard_;
+  std::map<int, Board*> boardMap_;
   // Add Data members
 
 };
