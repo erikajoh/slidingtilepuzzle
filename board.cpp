@@ -63,7 +63,7 @@ Board::Board(int size, int numInitMoves, int seed )
 }
 
 
-/** Default constructor. Makes a 2x2 board in sorted frame. */
+/** Default constructor. Makes a sorted 2x2 board. */
 Board::Board()
 {
   size_ = 4;

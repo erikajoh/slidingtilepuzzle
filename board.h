@@ -52,7 +52,6 @@ class Board
   int size_;
   Board *newBoard_;
   std::map<int, Board*> boardMap_;
-  // Add Data members
 
 };
 
