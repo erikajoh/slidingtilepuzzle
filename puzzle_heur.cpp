@@ -1,6 +1,7 @@
 #include "puzzle_heur.h"
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
@@ -10,11 +11,11 @@ int ManhattanHeuristic::compute(int *tiles, int size)
   width = sqrt(size);
   for (int i=0; i<size; i++){
     if (tiles[i] && tiles[i] != i){
-      x = abs(i/width - (tiles[i])/width);
-      y = abs(i%width - (tiles[i])%width);
+      x = abs(i%width - (tiles[i])%width);
+      y = abs(i/width - (tiles[i])/width);
       score += x + y;
     }
-  }     
+  }
   return score;
 }
 
