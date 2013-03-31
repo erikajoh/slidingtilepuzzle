@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
   }
 
   cout << b << endl;
-  cout << "Congrats! You solved it!" << endl;
+  cout << "Congrats, you solved it!" << endl;
 
   return 0;
 
