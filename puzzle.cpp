@@ -15,8 +15,18 @@ int main(int argc, char *argv[])
   }
 
   int size, initMoves, seed;
+  double width, widthCheck;
 
   size = atoi(argv[1]);
+
+  width = sqrt(size);
+  int temp = width;
+  widthCheck = temp;
+  if (width != widthCheck){
+    cerr << "Invalid size: should be a perfect square" << endl;
+    exit(0);
+  }
+
   initMoves = atoi(argv[2]);
   seed = atoi(argv[3]);
 
@@ -30,11 +40,11 @@ int main(int argc, char *argv[])
 
   while(!b.solved()){
     cout << b;
-    cout << "\nEnter tile number to move or -1 for a cheat: ";
+    cerr << "\nEnter tile number to move or -1 for a cheat: ";
     cin >> tileToMove;
 
     if (cin.fail()){
-      cout << "Invalid entry, please try again" << endl << endl;
+      cerr << "Invalid entry, please try again" << endl << endl;
       cin.clear();
       cin.ignore(256, '\n');
     } else if (tileToMove == -1){
@@ -54,7 +64,7 @@ int main(int argc, char *argv[])
       b.move(tileToMove);
       cout << endl;
     } else {
-      cout << "Invalid entry, please try again" << endl << endl;
+      cerr << "Invalid entry, please try again" << endl << endl;
     }
   }
 

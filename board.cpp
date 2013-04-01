@@ -183,9 +183,17 @@ ostream& operator<<(ostream &os, const Board &b)
   }
   for (int i=0; i<b.size_; i++){
     if (i<rowNum-1){
+      if (!b.tiles_[i]){
+	os << setw(j) << " " << " ";
+      } else {
       os << setw(j) << b.tiles_[i] << " ";
+      }
     } else {
+      if (!b.tiles_[i]){
+	os << setw(j) << " " << endl;
+      } else {
       os << setw(j) << b.tiles_[i] << endl;
+      }
       rowNum += width;
     }
   }
