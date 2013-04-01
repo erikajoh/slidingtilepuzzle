@@ -50,9 +50,13 @@ class Board
   int getSize();
 
  private:
+  /** Tiles in board */
   int *tiles_;
+  /** Size of board, i.e. number of tiles in board */
   int size_;
+  /** Board pointer for copy constructors */
   Board *newBoard_;
+  /** Map to store potential moves, with Key=tile that is moved, Value=Ptr to resulting Board */
   std::map<int, Board*> boardMap_;
 
 };

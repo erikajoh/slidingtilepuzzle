@@ -24,7 +24,7 @@ class PMMinList
   /** Returns the PuzzleMove with the lowest score */
   PuzzleMove* top();
  private:
-  /** the sorted list */
+  /** sorted list of PuzzleMove*s */
   std::list<PuzzleMove*> slist_;
 };
 

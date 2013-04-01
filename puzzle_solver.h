@@ -35,12 +35,17 @@ class PuzzleSolver
   int getNumExpansions();
 
  private:
+  /** Board to use in PuzzleSolver */
   Board *b_;
+  /** Number of expansions that are performed in the search */
   int expansions_;
-  //**** Declare a List to store your solutions sequence of tiles to move
+  /** List to store the solutions sequence of tiles to move */
   MyList<int> solutions_;
+  /** List to store sorted PuzzleMove*s to explore */
   PMMinList openList_;
+  /** BoardSet object to store explored PuzzleMove*s */
   BoardSet closedList_;
+  /** Vector to store all created PuzzleMove*s for deletion at end */
   vector<PuzzleMove*> garbageList_;
 
 };

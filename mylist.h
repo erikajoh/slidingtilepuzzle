@@ -25,8 +25,11 @@ public:
   bool remove(T val);
   T& operator[](int loc);
 private:
+  /** Keeps track of size (capacity) of list */
   int _size;
+  /** Keeps track of location of last item in list, i.e. size (in use) of list */
   int _at;
+  /** Pointer to existing list, for creation of new list with double the size (facilitates unbounded list) */
   T *_list;
 };
 
