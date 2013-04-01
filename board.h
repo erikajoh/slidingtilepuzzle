@@ -5,10 +5,11 @@
 #include <map>
 #include <functional>
 
+/** Board creates a puzzle board with size, number of tile moves to scramble board, and randomly chosen direction based on commandline arguments, and stores the tiles and size of the puzzle board and potential and subsequent boards throughout puzzle play */
 class Board
 {
  public:
-  /**  Default constructor */
+  /**  Default constructor, makes a sorted 2x2 board */
   Board(); 
 
   /** Init a board of given size and scramble it with numInitMoves 
@@ -22,30 +23,31 @@ class Board
   /** Another kind of "copy" constructor */
   Board(int *tiles, int size); 
 
-  /** Destructor */
+  /** Default destructor */
   ~Board();
 
   /** Swaps the blank with the specified tile */
   void move(int tile);
 
-  /** Generate potential moves and returns new boards
-   * Key=tile, Value=Ptr to corresponding Board */
+  /** Generate potential moves and returns new boards */
   std::map<int, Board*> potentialMoves(); 
 
-  /** Returns true if the board is solved, false otherwise */
+  /** Checks to see if board is in solved state */
   bool solved();
 
-  // Operator functions
+  /** Prints board */
   friend std::ostream& operator<<(std::ostream &os, const Board &b);
+  /** Checks to see if two boards are the same */
   bool operator==(const Board& rhs) const;
+  /** Checks to see if one board is smaller than another */
   bool operator<(const Board& rhs) const;
+  /** Checks to see if two boards are different */
   bool operator!=(const Board& rhs) const;
   
-  // Accessor functions
+  /** Accessor function for tiles in board */
   int* getTiles();
+  /** Accessor function for size of board */
   int getSize();
-  // Add any accessors
-
 
  private:
   int *tiles_;
@@ -55,10 +57,14 @@ class Board
 
 };
 
-// Leave this alone and don't touch it!
+/** BoardLessThan defines how to compare Board*s */
 struct BoardLessThan : 
   public std::binary_function<const Board*, const Board*,bool>
 {
+  /** Compares Board*s
+   * @param b1 First Board* to compare
+   * @param b2 Second Board* to compare
+   * @return true if b1 is less than b2, false otherwise */
   bool operator()(const Board *b1, const Board *b2) const
   {
     return *b1 < *b2;

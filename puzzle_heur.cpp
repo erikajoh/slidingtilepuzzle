@@ -5,6 +5,9 @@
 
 using namespace std;
 
+/** @param tiles Tiles in board to compute h score for
+ * @param size Size of board to compute h score for
+ * @return score based on Manhattan heuristic computation */
 int ManhattanHeuristic::compute(int *tiles, int size)
 {
   int x, y, score=0, width;
@@ -19,6 +22,9 @@ int ManhattanHeuristic::compute(int *tiles, int size)
   return score;
 }
 
+/** @param tiles Tiles in board to compute h score for
+ * @param size Size of board to compute h score for
+ * @return score based on out-of-place heuristic computation */
 int OutOfPlaceHeuristic::compute(int *tiles, int size)
 {
   int score=0;

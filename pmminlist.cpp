@@ -18,10 +18,9 @@ PMMinList::~PMMinList()
 }
 
 /**
- * Adds the value val to the internal list in sorted
- * order from smallest to largest (if 
- * @param val Value to add to the sorted PuzzleMove list
- * @return nothing
+ * Adds a PuzzleMove* to the internal list in sorted
+ * order from smallest to largest
+ * @param pm PuzzleMove* to add to the sorted PuzzleMove* list
  */
 void PMMinList::push(PuzzleMove* pm)
 {
@@ -48,10 +47,8 @@ void PMMinList::push(PuzzleMove* pm)
 }
 
 /**
- * Adds the value val to the internal list in sorted
- * order from smallest to largest
- * @param val Value to add to the sorted PuzzleMove list
- * @return nothing
+ * Removes PuzzleMove* from beginning of sorted PuzzleMove* list (i.e.
+ * minimum-scored PuzzleMove*)
  */
 void PMMinList::pop()
 {
@@ -59,9 +56,7 @@ void PMMinList::pop()
 }
 
 /**
- * Adds the value val to the internal list in sorted
- * order from smallest to largest
- * @param val Value to add to the sorted PuzzleMove list
+ * Gets PuzzleMove* from beginning of sorted PuzzleMove* list
  * @return reference to the minimum-scored PuzzleMove*
  */
 PuzzleMove* PMMinList::top()

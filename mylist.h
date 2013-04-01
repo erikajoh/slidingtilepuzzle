@@ -12,7 +12,7 @@
 
 using namespace std;
 
-//templated dynamically allocated unbounded array list
+/** Templated dynamically allocated unbounded array list */
 template <typename T>
 class MyList {
 public:
@@ -30,6 +30,7 @@ private:
   T *_list;
 };
 
+/** Constructor, creates empty list */
 template <typename T>
 MyList<T>::MyList(){
   _size = 1;
@@ -37,12 +38,14 @@ MyList<T>::MyList(){
   _list = new T[_size]; //dynamically allocates array
 }
 
+/** Destructor, deletes list */
 template <typename T>
 MyList<T>::~MyList(){
   delete [] _list;
 }
 
-//adds item to list
+/** Adds item to list
+ * @param val Value to add to list */
 template <typename T>
 void MyList<T>::pushBack(T val){
   if (_at == _size){ //no more allocated capacity for new items in list
@@ -57,19 +60,23 @@ void MyList<T>::pushBack(T val){
   _list[_at++] = val; //add val to list and increment location of last item in list
 }
 
-//returns allocated size (capacity) of list
+/** Returns allocated size (capacity) of list
+ * @return allocated size (capacity) of list */
 template <typename T>
 int MyList<T>::getSize(){
   return _size;
 }
 
-//returns location of last item in list
+/** Returns location of last item in list
+ * @return location of last item in list */
 template <typename T>
 int MyList<T>::whereAt(){
   return _at;
 }
 
-//returns reference to value at given location in list
+/** Returns reference to value at given location in list
+ * @param loc Location of value to return
+ * @return reference to value at given location in list */
 template <typename T>
 T& MyList<T>::getVal(int loc){
   if (loc >= _at || loc < 0){
@@ -78,7 +85,9 @@ T& MyList<T>::getVal(int loc){
   return _list[loc];
 }
 
-//removes item from list
+/** Removes item from list
+ * @param val Value of item to remove
+ * @return true if value was successfully removed, false if value not found */
 template<typename T>
 bool MyList<T>::remove(T val){
   for (int i=0; i<_at; i++){
@@ -92,7 +101,9 @@ bool MyList<T>::remove(T val){
   return false;
 }
 
-//does same thing as getVal() function
+/** Does same thing as getVal() function
+ * @param loc Location of value to return
+ * @return reference to value at given location in list */
 template<typename T>
 T& MyList<T>::operator[](int loc){
   if (loc >= _at || loc < 0){

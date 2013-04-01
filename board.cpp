@@ -7,12 +7,8 @@
 #include "board.h"
 using namespace std;
 
-/** Init a board of given size and scramble it with numInitMoves 
- * by moving the space tile with a randomly chosen direction N, W, S, E
- * some of which may be invalid, in which case we skip that move 
- * 
- *  @param size Number of tiles for the game.  \
- *      Should be a perfect square (4, 16, 25)
+/** @param size Number of tiles for the game.  \
+ *  Should be a perfect square (4, 16, 25)
  *  @param numInitMoves Number of tile moves to attempt to scramble the board
  *  @param seed Use to seed the random number generator (srand) 
  */
@@ -61,8 +57,6 @@ Board::Board(int size, int numInitMoves, int seed )
   }
 }
 
-
-/** Default constructor. Makes a sorted 2x2 board. */
 Board::Board()
 {
   size_ = 4;
@@ -72,6 +66,7 @@ Board::Board()
   }
 }
 
+/** Copy constructor */
 Board::Board(const Board &b)
 {
   size_ = b.size_;
@@ -81,6 +76,8 @@ Board::Board(const Board &b)
   }
 }
 
+/** @param tiles Array of tiles to be copied
+ * @param size Size of board to be copied */
 Board::Board(int *tiles, int size)
 {
   size_ = size;
@@ -90,12 +87,12 @@ Board::Board(int *tiles, int size)
   }
 }
 
-/** Default destructor. Deletes tiles_. */
 Board::~Board()
 {
   delete [] tiles_;
 }
 
+/** @param tile Value of tile to swap with the blank */
 void Board::move(int tile)
 {
   int width = sqrt(size_);
@@ -116,7 +113,7 @@ void Board::move(int tile)
   }
 }
 
-/** Maps potential moves */
+/** @return map of new boards with Key=tile, Value=Ptr to corresponding Board */
 map<int, Board*> Board::potentialMoves()
 {
   int width = sqrt(size_);
@@ -161,6 +158,7 @@ map<int, Board*> Board::potentialMoves()
 
 }
 
+/** @return true if the board is solved, false otherwise */
 bool Board::solved()
 {
   for (int i=0; i<size_; i++){
@@ -171,6 +169,9 @@ bool Board::solved()
     return true;
 }
 
+/** @param os ostream to contain the board in printable format
+ * @param b board to be written to ostream in printable format
+ * @return ostream containing the board in printable format */
 ostream& operator<<(ostream &os, const Board &b)
 {
   int width = sqrt(b.size_);
@@ -200,6 +201,8 @@ ostream& operator<<(ostream &os, const Board &b)
   return os;
 }
 
+/** @param rhs board to compare with this board
+ * @return true if boards are the same, false otherwise */
 bool Board::operator==(const Board& rhs) const
 {
   for (int i=0; i<size_; i++){
@@ -210,6 +213,8 @@ bool Board::operator==(const Board& rhs) const
   return true;
 }
 
+/** @param rhs board to compare with this board
+ * @return true if this board is smaller than the other, false if the other board is smaller than this board */
 bool Board::operator<(const Board& rhs) const
 {
   if(size_ < rhs.size_){
@@ -230,6 +235,8 @@ bool Board::operator<(const Board& rhs) const
   return val;
 }
 
+/** @param rhs board to compare to this board
+ * @return true if boards are different, false otherwise */
 bool Board::operator!=(const Board& rhs) const
 {
   if (Board::operator==(rhs)){
@@ -239,11 +246,13 @@ bool Board::operator!=(const Board& rhs) const
   }
 }
 
+/** @return array of tiles in board */
 int* Board::getTiles()
 {
   return tiles_;
 }
 
+/** @return size of board */
 int Board::getSize()
 {
   return size_;

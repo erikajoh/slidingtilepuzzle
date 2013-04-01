@@ -10,28 +10,28 @@
 #include "mylist.h"
 #include "pmminlist.h"
 
+/**
+ * PuzzleSolver implements the A* algorithm to solve the puzzle from
+ * a given starting Board to the solved state */
 class PuzzleSolver
 {
  public:
-  //*** Typedef for the closed-list set.  Declare your closed list variable as
-  //***   BoardSet closedlist; 
-  //*** when you write your code for the run() funciton
+  /** Typedef for the closed-list set */
   typedef std::set<Board *, BoardLessThan> BoardSet;
 
-  // Constructor (makes a copy of the Board and stores it in _b
+  /** Constructor (makes a copy of the Board and stores it in _b) */
   PuzzleSolver(const Board &b);
 
-  // Destructor
+  /** Destructor */
   ~PuzzleSolver();
 
-  // Run the A* search returning -1 if no solution exists or
-  //  the number of moves in the solution
+  /** Runs the A* search returning -1 if no solution exists or the number of moves in the solution */
   int run(PuzzleHeuristic *ph);
 
-  //**** Return the solution List
+  /** Returns the solution list */
   MyList<int>& getSolutions();
 
-  // Return how many expansions were performed in the search
+  /** Returns how many expansions were performed in the search */
   int getNumExpansions();
 
  private:
