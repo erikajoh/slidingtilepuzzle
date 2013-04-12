@@ -93,10 +93,10 @@ Board::~Board()
 }
 
 /** @param tile Value of tile to swap with the blank */
-void Board::move(int tile)
+bool Board::move(int tile)
 {
   int width = sqrt(size_);
-  int tileLoc, zeroLoc;
+  int tileLoc=-1, zeroLoc=-1;
   for (int i=0; i<size_; i++){
     if (tiles_[i] == 0){
       zeroLoc = i;
@@ -109,15 +109,17 @@ void Board::move(int tile)
     tiles_[zeroLoc] = tile;
     tiles_[tileLoc] = 0;
   } else {
-    cout << "Invalid tile move, please try again" << endl;
+    //cout << "Invalid tile move, please try again" << endl;
+    return false;
   }
+  return true;
 }
 
 /** @return map of new boards with Key=tile, Value=Ptr to corresponding Board */
 map<int, Board*> Board::potentialMoves()
 {
   int width = sqrt(size_);
-  int zeroLoc, up, down, left, right;
+  int zeroLoc=-1, up=-1, down=-1, left=-1, right=-1;
   for (int i=0; i<size_; i++){
     if (tiles_[i] == 0){
       zeroLoc = i;

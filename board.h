@@ -27,7 +27,7 @@ class Board
   ~Board();
 
   /** Swaps the blank with the specified tile */
-  void move(int tile);
+  bool move(int tile);
 
   /** Generate potential moves and returns new boards */
   std::map<int, Board*> potentialMoves(); 
