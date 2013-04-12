@@ -148,6 +148,7 @@ void MainWindow::newGame(){
 
 }
 
+//moves tile in Board item and in QGraphicsView
 void MainWindow::moveTile(int tile) {
   bool check = b->move(tile);
 
