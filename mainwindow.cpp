@@ -18,6 +18,7 @@ MainWindow::MainWindow()  {
 
     start = new QPushButton("&Start");
     connect(start, SIGNAL(clicked()), this, SLOT(newGame()));
+    //Quit Button
     quit = new QPushButton("&Quit");
     connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
     input = new QFormLayout;
