@@ -98,10 +98,12 @@ void MainWindow::newGame(){
   oop->setEnabled(1);
   potMoves->setEnabled(1);
 
+  //will return 0 if error converting to int, i.e. input is not int
   int sizeInput = (size->text()).toInt();
   int numMovesInput = (numMoves->text()).toInt();
   int seedInput = (seed->text()).toInt();
 
+  //check for illegal values
   if(sizeInput != 9 && sizeInput != 16){
     errors->setText("Whoops! You gotta enter 9 or 16 for size.");
     return;
