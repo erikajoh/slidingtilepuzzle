@@ -269,5 +269,17 @@ MainWindow::~MainWindow()
     delete timer;
     delete start;
     delete quit;
+    for (int i=0; i<tiles_->whereAt(); i++){
+      delete tiles_->getVal(i);
+    }
+    delete tiles_;
+    delete cheat;
+    delete manhat;
+    delete oop;
+    delete input;
+    delete size;
+    delete seed;
+    delete numMoves;
+    delete errors;
 }
 
