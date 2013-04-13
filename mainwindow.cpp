@@ -227,6 +227,8 @@ void MainWindow::getCheat(){
     errors->setText("Whoops! You gotta choose a heuristic.");
     return;
   }
+
+  //Display of A* output
   if (solution == -1){
     errors->setText("Oh no! There is no solution!");
   } else {
