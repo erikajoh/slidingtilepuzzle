@@ -14,7 +14,7 @@ make
 ```
 
 ### Doxygen Instructions
-The grader should use the following procedure to generate the doxygen documentation for my PA:
+The grader should use the following procedure to generate doxygen documentation for my PA:
 ```shell
 doxygen -g config.txt
 doxygen config.txt
