@@ -18,7 +18,6 @@ MainWindow::MainWindow()  {
 
     start = new QPushButton("&Start");
     connect(start, SIGNAL(clicked()), this, SLOT(newGame()));
-    //Quit Button
     quit = new QPushButton("&Quit");
     connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
     input = new QFormLayout;
@@ -31,10 +30,13 @@ MainWindow::MainWindow()  {
     cheat = new QPushButton("&Cheat");
     cheat->setDisabled(1);
     connect(cheat, SIGNAL(clicked()), this, SLOT(getCheat()));
+
+    //Heuristic selection
     manhat = new QRadioButton("&Manhattan Heuristic");
     manhat->setDisabled(1);
     oop = new QRadioButton("&Out-of-Place Heuristic");
     oop->setDisabled(1);
+
     potMoves = new QListView;
     potMoves->setFixedHeight(60);
     QStandardItemModel *model = new QStandardItemModel();
@@ -72,8 +74,11 @@ MainWindow::MainWindow()  {
     w->setWindowTitle("Graphical Tile Puzzle");
 
     timer = new QTimer(this);
-    //connect(timer, SIGNAL(timeout()), this, SLOT(moveTile()));
+    timer->setInterval(5);
+    connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
+    time = 0;
 
+    tileMoving = false;
 }
 
 void MainWindow::newGame(){
@@ -97,13 +102,12 @@ void MainWindow::newGame(){
   manhat->setEnabled(1);
   oop->setEnabled(1);
   potMoves->setEnabled(1);
+  errors->setText("You are currently error-free!");
 
-  //will return 0 if error converting to int, i.e. input is not int
   int sizeInput = (size->text()).toInt();
   int numMovesInput = (numMoves->text()).toInt();
   int seedInput = (seed->text()).toInt();
 
-  //check for illegal values
   if(sizeInput != 9 && sizeInput != 16){
     errors->setText("Whoops! You gotta enter 9 or 16 for size.");
     return;
@@ -144,12 +148,15 @@ void MainWindow::newGame(){
 
   for (int i=0; i<sizeInput; i++){
     tiles_->getVal(i)->setDisp(*(b->getTiles() + i));
+    if (!(tiles_->getVal(i)->getID())){
+      tiles_->getVal(i)->hide();
+    }
   }
 
 }
 
-//moves tile in Board item and in QGraphicsView
 void MainWindow::moveTile(int tile) {
+
   bool check = b->move(tile);
 
   if (check){
@@ -159,7 +166,7 @@ void MainWindow::moveTile(int tile) {
     return;
   }
 
-  int origTile=-1, blankTile=-1, origX=-1, origY=-1, newX=-1, newY=-1;
+  int origTile=-1, blankTile=-1, origX=-1, origY=-1;
   for (int i=0; i<tiles_->whereAt(); i++){
     if (tiles_->getVal(i)->getID() == tile){
       origTile = i;
@@ -173,13 +180,18 @@ void MainWindow::moveTile(int tile) {
     }
   }
 
-  tiles_->getVal(blankTile)->move(origX,origY);
-  tiles_->getVal(origTile)->move(newX,newY);
+  for (int i=0; i<tiles_->getVal(blankTile)->getWidth(); i++){
+    tiles_->getVal(blankTile)->move(origX,origY);
+  }
 
-  QBrush whiteBrush(Qt::white);
+  tileToMove = tiles_->getVal(origTile);
 
-  tiles_->getVal(blankTile)->setBrush(whiteBrush);
-  tiles_->getVal(origTile)->setDisp(tiles_->getVal(origTile)->getID());
+  timer->start();
+  tileMoving = true;
+  //tiles_->getVal(origTile)->move(newX,newY);
+
+  tileVal = tiles_->getVal(origTile)->getID();
+  //tiles_->getVal(origTile)->setDisp(tiles_->getVal(origTile)->getID());
 
   GUITile *temp = tiles_->getVal(origTile);
   tiles_->getVal(origTile) = tiles_->getVal(blankTile);
@@ -230,12 +242,20 @@ void MainWindow::getCheat(){
 }
 
 void MainWindow::show() {
-    //This is only called once by main. Timers don't start working until
-    //we call start
-    timer->start();
-
     //This is how we get our view displayed.
     w->show();
+}
+
+void MainWindow::handleTimer(){
+  if (time++ < tileToMove->getWidth()){
+    tileToMove->move(newX,newY);
+    tileToMove->setDisp(tileVal);
+  } else {
+    time = 0;
+    timer->stop();
+    tileMoving = false;
+  }
+
 }
 
 MainWindow::~MainWindow()
@@ -244,3 +264,4 @@ MainWindow::~MainWindow()
     delete start;
     delete quit;
 }
+

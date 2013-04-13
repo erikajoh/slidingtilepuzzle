@@ -46,6 +46,8 @@ public:
     void show();
     void moveTile(int tile);
 
+    bool tileMoving;
+
 
 private:
     QGraphicsScene *scene;
@@ -66,10 +68,13 @@ private:
     QGraphicsSimpleTextItem *tileNum;
     int viewHeight;
     Board *b;
+    GUITile *tileToMove;
+    int time, newX, newY, tileVal;
 
 public slots:
     void newGame();
     void getCheat();
+    void handleTimer();
 
 };
 

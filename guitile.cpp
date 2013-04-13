@@ -21,11 +21,36 @@ GUITile::~GUITile(){
 
 void GUITile::move( int xpos, int ypos ) {
 
-  while (x != xpos){
-    x++;
+  if (x == xpos){
+    moveL = false;
+    moveR = false;
+    if (y < ypos){
+      moveU = false;
+      moveD = true;
+    } else {
+      moveU = true;
+      moveD = false;
+    }
+  } else if (y == ypos){
+    moveU = false;
+    moveD = false;
+    if (x < xpos){
+      moveL = false;
+      moveR = true;
+    } else {
+      moveL = true;
+      moveR = false;
+    }
   }
-  while (y != ypos){
-    y ++;
+
+  if (moveR){
+    x++;
+  } else if (moveL){
+    x--;
+  } else if (moveU){
+    y--;
+  } else if (moveD){
+    y++;
   }
 
     //Everything is good. Update the QRectF that is actually displayed.
@@ -76,9 +101,16 @@ void GUITile::setDisp(int n){
 }
 
 void GUITile::mousePressEvent(QGraphicsSceneMouseEvent* event){
-  mwindow->moveTile(id);
+  event = event;
+  if (!(mwindow->tileMoving)){
+    mwindow->moveTile(id);
+  }
 }
 
 int GUITile::getID(){
   return id;
+}
+
+int GUITile::getWidth(){
+  return width;
 }

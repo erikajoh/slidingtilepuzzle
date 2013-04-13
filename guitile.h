@@ -27,6 +27,7 @@ public:
     void setDisp(int n);
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
     int getID();
+    int getWidth();
 
 private:
     int x;
@@ -37,6 +38,7 @@ private:
     MainWindow *mwindow;
     int id;
     MyList<QGraphicsSimpleTextItem*> dispList;
+    bool moveL, moveR, moveU, moveD;
 };
 
 #endif // GUITILE_H
