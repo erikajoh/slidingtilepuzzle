@@ -108,6 +108,8 @@ void MainWindow::newGame(){
   int numMovesInput = (numMoves->text()).toInt();
   int seedInput = (seed->text()).toInt();
 
+
+  //Handling of illegal options
   if(sizeInput != 9 && sizeInput != 16){
     errors->setText("Whoops! You gotta enter 9 or 16 for size.");
     return;
