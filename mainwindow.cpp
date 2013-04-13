@@ -249,6 +249,7 @@ void MainWindow::show() {
     w->show();
 }
 
+//Tile Animation
 void MainWindow::handleTimer(){
   if (time++ < tileToMove->getWidth()){
     tileToMove->move(newX,newY);
