@@ -6,7 +6,6 @@
 
 MainWindow::MainWindow()  {
 
-    //We need a scene and a view to do graphics in QT
     scene = new QGraphicsScene();
     view = new QGraphicsView(scene);
     layout = new QVBoxLayout;
