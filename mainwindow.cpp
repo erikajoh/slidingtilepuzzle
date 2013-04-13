@@ -208,6 +208,7 @@ void MainWindow::moveTile(int tile) {
 
 }
 
+//Execution of A* algorithm
 void MainWindow::getCheat(){
   Board n(*b);
   int solution=0;
