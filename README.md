@@ -7,8 +7,10 @@
 ### Compile & Run Instructions
 The grader should use the following procedure to compile and run the code:
 ```shell
+qmake -project
+qmake
 make
-./puzzle size initMoves seed
+./puzzle_erikajoh
 ```
 
 ### Doxygen Instructions
